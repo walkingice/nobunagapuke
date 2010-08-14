@@ -23,11 +23,12 @@ import android.util.Log;
 import javax.microedition.khronos.opengles.GL10;
 import com.stickycoding.rokon.Rokon;
 import com.stickycoding.rokon.GameObject;
+import android.game.tetris.ITetrisConstants;
 
-public class Board extends GameObject {
+public class Board extends GameObject implements ITetrisConstants{
 
-    private final static int sCols = 12;
-    private final static int sRows = 18;
+    private final static int sCols = PLAYFIELD_COLS;
+    private final static int sRows = PLAYFIELD_ROWS;
     private static float sBorderWidth = 1f;
     private static float sBorderHeight = 1f;
     private static float sCellWidth  = 1f;
@@ -36,6 +37,8 @@ public class Board extends GameObject {
     private final static float sR = 242f / 255f;
     private final static float sG = 251f / 255f;
     private final static float sB = 157f / 255f;
+
+    private boolean[] mCells;
 
     private final static int sColorCount = 4;
     private final static int sColorSpace = 3; // R, G, B
@@ -47,11 +50,12 @@ public class Board extends GameObject {
         {150f/255f, 162f/255f, 43f/255f}
     };
 
-    Board(float x, float y, float width, float height) {
+    Board(float x, float y, float width, float height, boolean[] cells) {
         super(x, y, width, height);
         this.fill = true;
         this.setRGB(0.8f, 0.2f, 0.3f);
         this.setSize(width, height);
+        mCells = cells;
         initColor();
     }
 
@@ -90,12 +94,14 @@ public class Board extends GameObject {
         for (int i = 0; i < sCols; i++) {
             for (int j = 0; j < sRows; j++) {
                 count = j * sCols + i;
-                super.setRGB(sColor[count][0], sColor[count][1], sColor[count][2]);
-                super.setWidth(sCellWidth);
-                super.setHeight(sCellHeight);
-                super.setX(x + sCellWidth  * i);
-                super.setY(y + sCellHeight * j);
-                super.onDrawVBO(gl);
+                if (mCells[count] == true) {
+                    super.setRGB(sColor[count][0], sColor[count][1], sColor[count][2]);
+                    super.setWidth(sCellWidth);
+                    super.setHeight(sCellHeight);
+                    super.setX(x + sCellWidth  * i);
+                    super.setY(y + sCellHeight * j);
+                    super.onDrawVBO(gl);
+                }
             }
         }
 
