@@ -42,6 +42,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private Texture nextNull;
 
     final private static int sScoreLength = 4;
+    private int mCurrentScore;
     private Sprite[] mScore;
     private Texture number;
 
@@ -166,6 +167,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         mGame.runRound();
     }
 
+    public void reset() {
+        mCurrentScore = 0;
+        mGame.setCurrentScore(0);
+        for (int i = 0; i < mCells.length; i++) {
+            mCells[i] = false;
+        }
+    }
+
     @Override
     public void onTouchDown(Drawable object, float x, float y, MotionEvent event, int pointerCount, int pointerId) {
         if (object == mBtnRotate) {
@@ -240,7 +249,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
             mNext.setTexture(nextNull);
         }
 
-        int score = mGame.getCurrentScore();
+        mCurrentScore = mGame.getCurrentScore();
+        int score = mCurrentScore;
         for (int i = sScoreLength -1; i >= 0; i--) {
             int tmp = score % 10;
             mScore[i].setTextureTile(tmp);
