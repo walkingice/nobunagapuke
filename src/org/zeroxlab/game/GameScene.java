@@ -1,6 +1,7 @@
 package org.zeroxlab.game;
 
 import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.os.SystemClock;
 
 import com.stickycoding.rokon.Scene;
@@ -173,6 +174,16 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         for (int i = 0; i < mCells.length; i++) {
             mCells[i] = false;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            MainActivity main = (MainActivity)super.activity;
+            main.goMenu();
+            return true;
+        }
+        return false;
     }
 
     @Override
