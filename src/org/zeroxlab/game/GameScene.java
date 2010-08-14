@@ -154,7 +154,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
             add(1, mScore[i]);
         }
 
-        mGame = new TetrisGame(Rokon.getActivity(), this);
+        reset();
     }
 
     @Override
@@ -171,6 +171,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void reset() {
+        mGame = new TetrisGame(Rokon.getActivity(), this);
         mCurrentScore = 0;
         mGame.setCurrentScore(0);
         for (int i = 0; i < mCells.length; i++) {
@@ -185,13 +186,12 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void startGame() {
-        /* game might just resume, reset time counter */
-        mPukeTime = SystemClock.uptimeMillis();
-        mGame.setGameFocus(true);
-
         if (mGameOver) {
             reset();
         }
+        /* game might just resume, reset time counter */
+        mPukeTime = SystemClock.uptimeMillis();
+        mGame.setGameFocus(true);
     }
 
     @Override
