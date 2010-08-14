@@ -38,6 +38,7 @@ public class MenuScene extends Scene {
         float bH = sSceneHeight * 0.2f;
         mPuke = new Sprite(bX, bY, bW, bH);
         mPuke.setTexture(menuPuke);
+        mPuke.setTouchable();
         add(0, mPuke);
     }
 
@@ -48,6 +49,8 @@ public class MenuScene extends Scene {
     @Override
     public void onTouchDown(Drawable object, float x, float y, MotionEvent event, int pointerCount, int pointerId) {
         if (object == mPuke) {
+            MainActivity main = (MainActivity)super.activity;
+            main.goGame();
         }
     }
 
