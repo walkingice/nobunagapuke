@@ -223,7 +223,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         mPukeTime = SystemClock.uptimeMillis();
         mBorder.setTexture(borderPuke);
         if (next == TYPE_LONG) {
-            mNext.setTexture(nextL);
+            mNext.setTexture(nextI);
         } else if (next == TYPE_BL) {
             mNext.setTexture(nextJ);
         } else if (next == TYPE_L) {
