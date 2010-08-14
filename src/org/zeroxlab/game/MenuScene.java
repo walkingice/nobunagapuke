@@ -10,8 +10,11 @@ import com.stickycoding.rokon.TextureAtlas;
 import com.stickycoding.rokon.Texture;
 import com.stickycoding.rokon.Drawable;
 import com.stickycoding.rokon.Rokon;
+import com.stickycoding.rokon.audio.RokonMusic;
 
 public class MenuScene extends Scene {
+
+    public final static String sMenuMusic = "audio/forgotten_hero.mp3";
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
@@ -56,13 +59,35 @@ public class MenuScene extends Scene {
 
     @Override
     public void onPause() {
+        stopMusic();
     }
 
     @Override
     public void onResume() {
+        playMusic();
     }
 
     @Override
     public void onReady() {
+    }
+
+    @Override
+    protected void onSetScene() {
+        super.onSetScene();
+        playMusic();
+    }
+
+    @Override
+    protected void onEndScene() {
+        stopMusic();
+    }
+
+    private void playMusic() {
+        boolean loop = true;
+        RokonMusic.play(sMenuMusic, loop);
+    }
+
+    private void stopMusic() {
+        RokonMusic.stop();
     }
 }
