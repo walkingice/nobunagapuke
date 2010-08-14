@@ -8,7 +8,12 @@ public class MainActivity extends RokonActivity {
 	public static final float GAME_WIDTH = 480f;
 	public static final float GAME_HEIGHT = 320f;
 
-	private GameScene mGameScene;
+        public static final int IN_MENU = 0;
+        public static final int IN_GAME = 1;
+        private static int sState = IN_MENU;
+
+        private static MenuScene mMenuScene;
+	private static GameScene mGameScene;
 
 	public void onCreate() {
 		debugMode();
@@ -21,8 +26,18 @@ public class MainActivity extends RokonActivity {
 	}
 
 	public void onLoadComplete() {
-                mGameScene = new GameScene();
-		setScene(mGameScene);
+            mGameScene = new GameScene();
+            mMenuScene = new MenuScene();
+            goMenu();
 	}
 
+        public void goGame() {
+	    setScene(mGameScene);
+            sState = IN_GAME;
+        }
+
+        public void goMenu() {
+            setScene(mMenuScene);
+            sState = IN_MENU;
+        }
 }
