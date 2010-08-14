@@ -122,10 +122,10 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         add(0, mBoard);
 
         float btnSize = sSceneHeight * 0.2f;
-        mBtnLeft   = new Sprite(sSceneWidth * 0.05f, sSceneHeight * 0.4f, btnSize, btnSize);
-        mBtnRight  = new Sprite(sSceneWidth * 0.21f, sSceneHeight * 0.7f, btnSize, btnSize);
-        mBtnDown   = new Sprite(sSceneWidth * 0.21f, sSceneHeight * 0.2f, btnSize * 0.8f, btnSize * 0.8f);
-        mBtnRotate = new Sprite(sSceneWidth * 0.9f, sSceneHeight * 0.5f, btnSize, btnSize);
+        mBtnLeft   = new Sprite(sSceneWidth * 0.04f, sSceneHeight * 0.4f, btnSize, btnSize);
+        mBtnRight  = new Sprite(sSceneWidth * 0.21f, sSceneHeight * 0.4f, btnSize, btnSize);
+        mBtnDown   = new Sprite(sSceneWidth * 0.14f, sSceneHeight * 0.72f, btnSize * 0.8f, btnSize * 0.8f);
+        mBtnRotate = new Sprite(sSceneWidth * 0.93f, sSceneHeight * 0.4f, btnSize, btnSize);
 
         mBtnLeft.setTexture(btnLeft);
         mBtnRight.setTexture(btnRight);
