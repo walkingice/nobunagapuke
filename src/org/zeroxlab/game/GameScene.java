@@ -9,7 +9,10 @@ import com.stickycoding.rokon.TextureAtlas;
 import com.stickycoding.rokon.Texture;
 import com.stickycoding.rokon.Drawable;
 
-public class GameScene extends Scene implements TetrisGame.GameCallback {
+import android.game.tetris.ITetrisConstants;
+import android.game.tetris.TetrisGame;
+
+public class GameScene extends Scene implements TetrisGame.GameCallback, ITetrisConstants {
 
     private FixedBackground background;
     private Sprite mBtnRight;
@@ -25,6 +28,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback {
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
+
+    private static boolean[] mCells = new boolean[PLAYFIELD_COLS * PLAYFIELD_ROWS];
 
     private Board mBoard;
 
@@ -52,7 +57,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback {
         float bH = sSceneHeight * 0.75f;
         float bX = sSceneWidth  * 0.37f;
         float bY = sSceneHeight * 0.2f;
-        mBoard = new Board(bX, bY, bW, bH);
+        mBoard = new Board(bX, bY, bW, bH, mCells);
         mBoard.setTexture(cellTexture);
         mBoard.show();
         add(0, mBoard);
