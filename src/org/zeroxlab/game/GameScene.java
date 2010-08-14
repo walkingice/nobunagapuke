@@ -1,6 +1,7 @@
 package org.zeroxlab.game;
 
 import android.view.MotionEvent;
+import android.os.SystemClock;
 
 import com.stickycoding.rokon.Scene;
 import com.stickycoding.rokon.Sprite;
@@ -34,6 +35,11 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private static float sSceneHeight = 320f;
 
     private static boolean[] mCells = new boolean[PLAYFIELD_COLS * PLAYFIELD_ROWS];
+
+    private boolean mPuking = false;
+    private static long mPukeTime;
+    private static long mNow;
+    final private static long sPukePeriod = 600;
 
     private Board mBoard;
     private TetrisGame mGame;
@@ -104,6 +110,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
 
     @Override
     public void onGameLoop() {
+        if (mPuking) {
+            mNow = SystemClock.uptimeMillis();
+            if ((mNow - mPukeTime) > sPukePeriod) {
+                mPuking = false;
+                mBorder.setTexture(borderNormal);
+            }
+        }
+
         mGame.runRound();
     }
 
@@ -159,6 +173,9 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void onShapeChanged(int current, int next) {
+        mPuking = true;
+        mPukeTime = SystemClock.uptimeMillis();
+        mBorder.setTexture(borderPuke);
     }
 
     public void onCellUpdated(boolean[] cells, int rows, int cols) {
