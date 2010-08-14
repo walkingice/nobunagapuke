@@ -201,6 +201,10 @@ public class TetrisGame implements ITetrisConstants, Runnable, TetrisShape.Callb
         return scoreManager.currentScore;
     }
 
+    public void setCurrentScore(int score) {
+        scoreManager.currentScore = score;
+    }
+
     public void manageScoreSave(boolean saveToDB, String player) {
         scoreManager.scoreWasSaved = true;
         if(saveToDB && player != null )
