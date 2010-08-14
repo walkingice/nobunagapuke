@@ -110,7 +110,7 @@ public class TetrisGame implements ITetrisConstants, Runnable, TetrisShape.Callb
 
         grid.init();
 
-        scoreManager.currentScore = 1;
+        scoreManager.currentScore = 0;
         scoreManager.scoreWasSaved = false;
 
     }
