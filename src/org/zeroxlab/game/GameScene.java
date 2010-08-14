@@ -7,6 +7,7 @@ import com.stickycoding.rokon.Sprite;
 import com.stickycoding.rokon.background.FixedBackground;
 import com.stickycoding.rokon.TextureAtlas;
 import com.stickycoding.rokon.Texture;
+import com.stickycoding.rokon.Drawable;
 
 public class GameScene extends Scene {
 
@@ -67,6 +68,11 @@ public class GameScene extends Scene {
         mBtnDown.setTexture(btnDown);
         mBtnRotate.setTexture(btnRotate);
 
+        mBtnLeft.setTouchable();
+        mBtnRight.setTouchable();
+        mBtnDown.setTouchable();
+        mBtnRotate.setTouchable();
+
         add(1, mBtnLeft);
         add(1, mBtnRight);
         add(1, mBtnDown);
@@ -75,6 +81,15 @@ public class GameScene extends Scene {
 
     @Override
     public void onGameLoop() {
+    }
+
+    @Override
+    public void onTouchDown(Drawable object, float x, float y, MotionEvent event, int pointerCount, int pointerId) {
+        if (object == mBtnRotate) {
+        } else if (object == mBtnRight){
+        } else if (object == mBtnLeft){
+        } else if (object == mBtnDown) {
+        }
     }
 
     @Override
