@@ -8,6 +8,7 @@ import com.stickycoding.rokon.background.FixedBackground;
 import com.stickycoding.rokon.TextureAtlas;
 import com.stickycoding.rokon.Texture;
 import com.stickycoding.rokon.Drawable;
+import com.stickycoding.rokon.Rokon;
 
 import android.game.tetris.ITetrisConstants;
 import android.game.tetris.TetrisGame;
@@ -32,6 +33,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private static boolean[] mCells = new boolean[PLAYFIELD_COLS * PLAYFIELD_ROWS];
 
     private Board mBoard;
+    private TetrisGame mGame;
 
     public GameScene() {
         super(2, 10);
@@ -82,18 +84,25 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         add(1, mBtnRight);
         add(1, mBtnDown);
         add(1, mBtnRotate);
+
+        mGame = new TetrisGame(Rokon.getActivity(), this);
     }
 
     @Override
     public void onGameLoop() {
+        mGame.runRound();
     }
 
     @Override
     public void onTouchDown(Drawable object, float x, float y, MotionEvent event, int pointerCount, int pointerId) {
         if (object == mBtnRotate) {
+            mGame.actionRotate();
         } else if (object == mBtnRight){
+            mGame.actionRight();
         } else if (object == mBtnLeft){
+            mGame.actionLeft();
         } else if (object == mBtnDown) {
+            mGame.actionFall();
         }
     }
 
@@ -116,14 +125,17 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
 
     @Override
     public void onPause() {
+        mGame.setGameFocus(false);
     }
 
     @Override
     public void onResume() {
+        mGame.setGameFocus(true);
     }
 
     @Override
     public void onReady() {
+        mGame.setGameFocus(true);
     }
 
     public void onGameOver() {
@@ -136,5 +148,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void onCellUpdated(boolean[] cells, int rows, int cols) {
+        for (int i = 0; i < cells.length; i++) {
+            mCells[i] = cells[i];
+        }
     }
 }
