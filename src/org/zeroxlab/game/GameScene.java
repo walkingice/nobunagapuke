@@ -181,6 +181,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void startGame() {
+        /* game might just resume, reset time counter */
+        mPukeTime = SystemClock.uptimeMillis();
         mGame.setGameFocus(true);
     }
 
