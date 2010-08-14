@@ -22,6 +22,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private Sprite mBtnDown;
     private Sprite mBtnRotate;
     private Sprite mBorder;
+    private Sprite mNext;
     private Texture backgroundTexture;
     private Texture cellTexture;
     private Texture btnRight;
@@ -30,6 +31,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private Texture btnRotate;
     private Texture borderNormal;
     private Texture borderPuke;
+    private Texture nextS;
+    private Texture next2;
+    private Texture nextL;
+    private Texture nextJ;
+    private Texture nextT;
+    private Texture nextI;
+    private Texture nextO;
+    private Texture nextNull;
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
@@ -56,6 +65,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         btnRotate = new Texture("btn_rotate.png");
         borderNormal = new Texture("border_normal.png");
         borderPuke   = new Texture("border_puke.png");
+        nextS = new Texture("next_a.png");
+        next2 = new Texture("next_b.png");
+        nextL = new Texture("next_c.png");
+        nextJ = new Texture("next_d.png");
+        nextT = new Texture("next_e.png");
+        nextI = new Texture("next_f.png");
+        nextO = new Texture("next_g.png");
+        nextNull = new Texture("next_null.png");
         atlas.insert(backgroundTexture);
         atlas.insert(cellTexture);
         atlas.insert(btnRight);
@@ -64,6 +81,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         atlas.insert(btnRotate);
         atlas.insert(borderNormal);
         atlas.insert(borderPuke);
+        atlas.insert(nextS);
+        atlas.insert(next2);
+        atlas.insert(nextL);
+        atlas.insert(nextJ);
+        atlas.insert(nextT);
+        atlas.insert(nextI);
+        atlas.insert(nextO);
+        atlas.insert(nextNull);
         atlas.complete();
 
         setBackground(background = new FixedBackground(backgroundTexture));
@@ -104,6 +129,10 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         add(1, mBtnRight);
         add(1, mBtnDown);
         add(1, mBtnRotate);
+
+        mNext = new Sprite(sSceneWidth * 0.9f, sSceneHeight * 0.1f, btnSize * 1.2f, btnSize*1.2f);
+        mNext.setTexture(nextNull);
+        add(1, mNext);
 
         mGame = new TetrisGame(Rokon.getActivity(), this);
     }
@@ -167,6 +196,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     }
 
     public void onGameOver() {
+        mNext.setTexture(nextNull);
     }
 
     public void onRedraw() {
@@ -176,6 +206,23 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         mPuking = true;
         mPukeTime = SystemClock.uptimeMillis();
         mBorder.setTexture(borderPuke);
+        if (next == TYPE_LONG) {
+            mNext.setTexture(nextL);
+        } else if (next == TYPE_BL) {
+            mNext.setTexture(nextJ);
+        } else if (next == TYPE_L) {
+            mNext.setTexture(nextL);
+        } else if (next == TYPE_SQUARE) {
+            mNext.setTexture(nextO);
+        } else if (next == TYPE_S) {
+            mNext.setTexture(nextS);
+        } else if (next == TYPE_BS) {
+            mNext.setTexture(next2);
+        } else if (next == TYPE_T) {
+            mNext.setTexture(nextT);
+        } else {
+            mNext.setTexture(nextNull);
+        }
     }
 
     public void onCellUpdated(boolean[] cells, int rows, int cols) {
