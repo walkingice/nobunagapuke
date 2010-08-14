@@ -57,6 +57,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private static long mNow;
     final private static long sPukePeriod = 600;
 
+    private boolean mGameOver = true;
+
     private Board mBoard;
     private TetrisGame mGame;
 
@@ -174,6 +176,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         for (int i = 0; i < mCells.length; i++) {
             mCells[i] = false;
         }
+
+        mGameOver = false;
     }
 
     public void pauseGame() {
@@ -184,6 +188,10 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         /* game might just resume, reset time counter */
         mPukeTime = SystemClock.uptimeMillis();
         mGame.setGameFocus(true);
+
+        if (mGameOver) {
+            reset();
+        }
     }
 
     @Override
@@ -243,6 +251,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
 
     public void onGameOver() {
         mNext.setTexture(nextNull);
+        mGameOver = true;
         pauseGame();
     }
 
