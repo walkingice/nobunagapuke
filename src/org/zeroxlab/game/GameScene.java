@@ -243,6 +243,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
 
     public void onGameOver() {
         mNext.setTexture(nextNull);
+        pauseGame();
     }
 
     public void onRedraw() {
