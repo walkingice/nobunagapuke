@@ -15,10 +15,13 @@ public class GameScene extends Scene {
     private Texture backgroundTexture;
     private Texture cellTexture;
 
+    private static float sSceneWidth = 480f;
+    private static float sSceneHeight = 320f;
+
     private Board mBoard;
 
     public GameScene() {
-        super(1, 1);
+        super(2, 10);
 
         TextureAtlas atlas = new TextureAtlas();
         backgroundTexture = new Texture("background.png");
@@ -29,7 +32,11 @@ public class GameScene extends Scene {
 
         setBackground(background = new FixedBackground(backgroundTexture));
 
-        mBoard = new Board(200, 10, 300, 300);
+        float bW = sSceneHeight * 0.69f;
+        float bH = sSceneHeight * 0.75f;
+        float bX = sSceneWidth  * 0.37f;
+        float bY = sSceneHeight * 0.2f;
+        mBoard = new Board(bX, bY, bW, bH);
         mBoard.setTexture(cellTexture);
         mBoard.show();
         add(0, mBoard);
