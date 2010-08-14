@@ -9,7 +9,7 @@ import com.stickycoding.rokon.TextureAtlas;
 import com.stickycoding.rokon.Texture;
 import com.stickycoding.rokon.Drawable;
 
-public class GameScene extends Scene {
+public class GameScene extends Scene implements TetrisGame.GameCallback {
 
     private FixedBackground background;
     private Sprite mBtnRight;
@@ -119,5 +119,17 @@ public class GameScene extends Scene {
 
     @Override
     public void onReady() {
+    }
+
+    public void onGameOver() {
+    }
+
+    public void onRedraw() {
+    }
+
+    public void onShapeChanged(int current, int next) {
+    }
+
+    public void onCellUpdated(boolean[] cells, int rows, int cols) {
     }
 }
