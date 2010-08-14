@@ -176,6 +176,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         }
     }
 
+    public void pauseGame() {
+        mGame.setGameFocus(false);
+    }
+
+    public void startGame() {
+        mGame.setGameFocus(true);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -218,17 +226,17 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
 
     @Override
     public void onPause() {
-        mGame.setGameFocus(false);
+        pauseGame();
     }
 
     @Override
     public void onResume() {
-        mGame.setGameFocus(true);
+        startGame();
     }
 
     @Override
     public void onReady() {
-        mGame.setGameFocus(true);
+        startGame();
     }
 
     public void onGameOver() {
