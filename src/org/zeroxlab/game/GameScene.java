@@ -17,6 +17,7 @@ import android.game.tetris.TetrisGame;
 public class GameScene extends Scene implements TetrisGame.GameCallback, ITetrisConstants {
 
     private FixedBackground background;
+    private Texture textTexture;
     private Sprite mBtnRight;
     private Sprite mBtnLeft;
     private Sprite mBtnDown;
@@ -39,6 +40,10 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private Texture nextI;
     private Texture nextO;
     private Texture nextNull;
+
+    final private static int sScoreLength = 4;
+    private Sprite[] mScore;
+    private Texture number;
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
@@ -65,6 +70,8 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         btnRotate = new Texture("btn_rotate.png");
         borderNormal = new Texture("border_normal.png");
         borderPuke   = new Texture("border_puke.png");
+        number = new Texture("number.png", 10, 1);
+
         nextS = new Texture("next_a.png");
         next2 = new Texture("next_b.png");
         nextL = new Texture("next_c.png");
@@ -81,6 +88,7 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         atlas.insert(btnRotate);
         atlas.insert(borderNormal);
         atlas.insert(borderPuke);
+        atlas.insert(number);
         atlas.insert(nextS);
         atlas.insert(next2);
         atlas.insert(nextL);
@@ -133,6 +141,14 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         mNext = new Sprite(sSceneWidth * 0.9f, sSceneHeight * 0.1f, btnSize * 1.2f, btnSize*1.2f);
         mNext.setTexture(nextNull);
         add(1, mNext);
+
+        mScore = new Sprite[sScoreLength];
+        float scoreSize = btnSize * 0.6f;
+        for (int i = 0; i < sScoreLength; i++) {
+            mScore[i] = new Sprite(sSceneWidth * 0.02f + scoreSize * i, sSceneHeight * 0.02f, scoreSize, scoreSize);
+            mScore[i].setTextureTile(number, 0);
+            add(1, mScore[i]);
+        }
 
         mGame = new TetrisGame(Rokon.getActivity(), this);
     }
@@ -222,6 +238,13 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
             mNext.setTexture(nextT);
         } else {
             mNext.setTexture(nextNull);
+        }
+
+        int score = mGame.getCurrentScore();
+        for (int i = sScoreLength -1; i >= 0; i--) {
+            int tmp = score % 10;
+            mScore[i].setTextureTile(tmp);
+            score = (int)(score/ 10);
         }
     }
 
