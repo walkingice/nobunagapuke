@@ -11,9 +11,16 @@ import com.stickycoding.rokon.Texture;
 public class GameScene extends Scene {
 
     private FixedBackground background;
-    private Sprite bob;
+    private Sprite mBtnRight;
+    private Sprite mBtnLeft;
+    private Sprite mBtnDown;
+    private Sprite mBtnRotate;
     private Texture backgroundTexture;
     private Texture cellTexture;
+    private Texture btnRight;
+    private Texture btnLeft;
+    private Texture btnDown;
+    private Texture btnRotate;
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
@@ -26,8 +33,16 @@ public class GameScene extends Scene {
         TextureAtlas atlas = new TextureAtlas();
         backgroundTexture = new Texture("background.png");
         cellTexture = new Texture("cell.png");
+        btnRight  = new Texture("btn_right.png");
+        btnLeft   = new Texture("btn_left.png");
+        btnDown   = new Texture("btn_down.png");
+        btnRotate = new Texture("btn_rotate.png");
         atlas.insert(backgroundTexture);
         atlas.insert(cellTexture);
+        atlas.insert(btnRight);
+        atlas.insert(btnLeft);
+        atlas.insert(btnDown);
+        atlas.insert(btnRotate);
         atlas.complete();
 
         setBackground(background = new FixedBackground(backgroundTexture));
@@ -40,6 +55,22 @@ public class GameScene extends Scene {
         mBoard.setTexture(cellTexture);
         mBoard.show();
         add(0, mBoard);
+
+        float btnSize = sSceneHeight * 0.2f;
+        mBtnLeft   = new Sprite(sSceneWidth * 0.05f, sSceneHeight * 0.4f, btnSize, btnSize);
+        mBtnRight  = new Sprite(sSceneWidth * 0.21f, sSceneHeight * 0.7f, btnSize, btnSize);
+        mBtnDown   = new Sprite(sSceneWidth * 0.21f, sSceneHeight * 0.2f, btnSize * 0.8f, btnSize * 0.8f);
+        mBtnRotate = new Sprite(sSceneWidth * 0.9f, sSceneHeight * 0.5f, btnSize, btnSize);
+
+        mBtnLeft.setTexture(btnLeft);
+        mBtnRight.setTexture(btnRight);
+        mBtnDown.setTexture(btnDown);
+        mBtnRotate.setTexture(btnRotate);
+
+        add(1, mBtnLeft);
+        add(1, mBtnRight);
+        add(1, mBtnDown);
+        add(1, mBtnRotate);
     }
 
     @Override
