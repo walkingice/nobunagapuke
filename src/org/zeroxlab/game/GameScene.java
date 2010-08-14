@@ -13,26 +13,26 @@ public class GameScene extends Scene {
     private FixedBackground background;
     private Sprite bob;
     private Texture backgroundTexture;
-    private Texture bobTexture;
+    private Texture cellTexture;
+
+    private Board mBoard;
 
     public GameScene() {
         super(1, 1);
 
         TextureAtlas atlas = new TextureAtlas();
         backgroundTexture = new Texture("background.png");
-        bobTexture = new Texture("bob.png");
+        cellTexture = new Texture("cell.png");
         atlas.insert(backgroundTexture);
-        atlas.insert(bobTexture);
+        atlas.insert(cellTexture);
         atlas.complete();
 
         setBackground(background = new FixedBackground(backgroundTexture));
 
-        // Create Sprite
-        bob = new Sprite(100, 220, bobTexture.getWidth(), bobTexture.getHeight());
-        bob.setTexture(bobTexture);
-
-        // Add the Bob sprite to the first layer.
-        add(0, bob);
+        mBoard = new Board(200, 10, 300, 300);
+        mBoard.setTexture(cellTexture);
+        mBoard.show();
+        add(0, mBoard);
     }
 
     @Override
@@ -49,9 +49,6 @@ public class GameScene extends Scene {
         // This is called when you move your finger over the screen.
         //(ie pretty much every frame if your holding your finger down)
 
-        // Here we'll basically just make Bob follow your finger.
-        bob.x = x - (bobTexture.getWidth()/2);
-        bob.y = y - (bobTexture.getHeight()/2);
     }
 
     @Override
