@@ -20,12 +20,15 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
     private Sprite mBtnLeft;
     private Sprite mBtnDown;
     private Sprite mBtnRotate;
+    private Sprite mBorder;
     private Texture backgroundTexture;
     private Texture cellTexture;
     private Texture btnRight;
     private Texture btnLeft;
     private Texture btnDown;
     private Texture btnRotate;
+    private Texture borderNormal;
+    private Texture borderPuke;
 
     private static float sSceneWidth = 480f;
     private static float sSceneHeight = 320f;
@@ -45,20 +48,31 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         btnLeft   = new Texture("btn_left.png");
         btnDown   = new Texture("btn_down.png");
         btnRotate = new Texture("btn_rotate.png");
+        borderNormal = new Texture("border_normal.png");
+        borderPuke   = new Texture("border_puke.png");
         atlas.insert(backgroundTexture);
         atlas.insert(cellTexture);
         atlas.insert(btnRight);
         atlas.insert(btnLeft);
         atlas.insert(btnDown);
         atlas.insert(btnRotate);
+        atlas.insert(borderNormal);
+        atlas.insert(borderPuke);
         atlas.complete();
 
         setBackground(background = new FixedBackground(backgroundTexture));
 
-        float bW = sSceneHeight * 0.69f;
-        float bH = sSceneHeight * 0.75f;
-        float bX = sSceneWidth  * 0.37f;
-        float bY = sSceneHeight * 0.2f;
+        float bX = sSceneWidth  * 0.38f;
+        float bY = 0;
+        float bW = sSceneHeight * 0.64f;
+        float bH = sSceneHeight;
+        mBorder = new Sprite(bX, bY, bW, bH);
+        mBorder.setTexture(borderNormal);
+        add(1, mBorder);
+        bX = bX + bW * 0.065f;
+        bY = bY + bH * 0.28f;
+        bW = bW * 0.87f;
+        bH = bH * 0.66f;
         mBoard = new Board(bX, bY, bW, bH, mCells);
         mBoard.setTexture(cellTexture);
         mBoard.show();
