@@ -21,7 +21,6 @@ public class MainActivity extends RokonActivity {
 	}
 
 	public void onLoadComplete() {
-		Textures.load();
                 mGameScene = new GameScene();
 		setScene(mGameScene);
 	}
