@@ -249,6 +249,18 @@ public class GameScene extends Scene implements TetrisGame.GameCallback, ITetris
         startGame();
     }
 
+    @Override
+    protected void onSetScene() {
+        super.onSetScene();
+        startGame();
+    }
+
+    @Override
+    protected void onEndScene() {
+        super.onEndScene();
+        pauseGame();
+    }
+
     public void onGameOver() {
         mNext.setTexture(nextNull);
         mGameOver = true;
