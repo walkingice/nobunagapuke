@@ -40,4 +40,10 @@ public class MainActivity extends RokonActivity {
             setScene(mMenuScene);
             sState = IN_MENU;
         }
+
+        @Override
+        public void onResume() {
+            setScene(mMenuScene);
+            super.onResume();
+        }
 }
