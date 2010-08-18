@@ -84,6 +84,16 @@ public class Board extends GameObject implements ITetrisConstants{
     @Override
     protected void onDrawVBO(GL10 gl) {
         super.onDrawVBO(gl);
+        onDrawBoard(gl);
+    }
+
+    @Override
+    protected void onDrawNormal(GL10 gl) {
+        super.onDrawNormal(gl);
+        onDrawBoard(gl);
+    }
+
+    protected void onDrawBoard(GL10 gl) {
         float x = getX();
         float y = getY();
         float w = getWidth();
