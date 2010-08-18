@@ -21,7 +21,7 @@ LOCAL_MODULE_TAGS := user
 
 LOCAL_SRC_FILES := $(call all-subdir-java-files)
 
-LOCAL_PACKAGE_NAME := Rokon
+LOCAL_PACKAGE_NAME := NobunagaPuke
 LOCAL_CERTIFICATE := shared
 LOCAL_JNI_SHARED_LIBRARIES := libgdx
 
