@@ -84,16 +84,16 @@ public class Board extends GameObject implements ITetrisConstants{
     @Override
     protected void onDrawVBO(GL10 gl) {
         super.onDrawVBO(gl);
-        onDrawBoard(gl);
+        onDrawBoard(gl, true);
     }
 
     @Override
     protected void onDrawNormal(GL10 gl) {
         super.onDrawNormal(gl);
-        onDrawBoard(gl);
+        onDrawBoard(gl, false);
     }
 
-    protected void onDrawBoard(GL10 gl) {
+    protected void onDrawBoard(GL10 gl, boolean drawVBO) {
         float x = getX();
         float y = getY();
         float w = getWidth();
@@ -110,7 +110,11 @@ public class Board extends GameObject implements ITetrisConstants{
                     super.setHeight(sCellHeight);
                     super.setX(x + sCellWidth  * i);
                     super.setY(y + sCellHeight * j);
-                    super.onDrawVBO(gl);
+                    if (drawVBO) {
+                        super.onDrawVBO(gl);
+                    } else {
+                        super.onDrawNormal(gl);
+                    }
                 }
             }
         }
