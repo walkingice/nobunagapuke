@@ -101,4 +101,6 @@ LOCAL_LDLIBS := -llog
 
 LOCAL_PRELINK_MODULE := false
 
+LOCAL_MODULE_TAGS := optional
+
 include $(BUILD_SHARED_LIBRARY)
